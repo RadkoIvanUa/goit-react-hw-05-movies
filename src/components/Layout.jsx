@@ -1,4 +1,13 @@
 import { NavLink, Outlet } from 'react-router-dom';
+import styled from '@emotion/styled';
+
+const StyledLink = styled(NavLink)`
+  color: black;
+
+  &.active {
+    color: orange;
+  }
+`;
 
 export default function Layout() {
   return (
@@ -7,10 +16,10 @@ export default function Layout() {
         <nav>
           <ul>
             <li>
-              <NavLink to="/">Home</NavLink>
+              <StyledLink to="/">Home</StyledLink>
             </li>
             <li>
-              <NavLink to="movies">Movies</NavLink>
+              <StyledLink to="movies">Movies</StyledLink>
             </li>
           </ul>
         </nav>
