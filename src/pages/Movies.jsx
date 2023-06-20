@@ -1,7 +1,6 @@
 import { useState, useEffect, lazy } from 'react';
 import { getSearchMovies } from 'helpers/api';
 import { useSearchParams } from 'react-router-dom';
-import { Suspense } from 'react';
 
 const MoviesList = lazy(() => import('../components/movies-list/MoviesList'));
 const SearchForm = lazy(() => import('../components/search-form/SearchForm'));
