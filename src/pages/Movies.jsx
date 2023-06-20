@@ -1,8 +1,10 @@
-import MoviesList from 'components/movies-list/MoviesList';
-import SearchForm from 'components/search-form/SearchForm';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, lazy } from 'react';
 import { getSearchMovies } from 'helpers/api';
 import { useSearchParams } from 'react-router-dom';
+import { Suspense } from 'react';
+
+const MoviesList = lazy(() => import('../components/movies-list/MoviesList'));
+const SearchForm = lazy(() => import('../components/search-form/SearchForm'));
 
 export default function Movies() {
   const [searchedMoviesArr, setSearchedMoviesArr] = useState([]);
@@ -17,7 +19,8 @@ export default function Movies() {
     if (!query) {
       return;
     }
-    getSearchMovies(query).then(result => {
+    getSearchMovies(query).then(resp => {
+      const result = resp.data.results;
       if (result.length === 0) {
         alert('NO MACH');
         return;

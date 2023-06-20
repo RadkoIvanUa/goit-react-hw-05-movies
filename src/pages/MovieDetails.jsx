@@ -1,5 +1,5 @@
 import { getMovieDetails } from 'helpers/api';
-import { useEffect, useRef, useState } from 'react';
+import { Suspense, useEffect, useRef, useState } from 'react';
 import { Link, useParams, useLocation, Outlet } from 'react-router-dom';
 
 export default function MovieDetails() {
@@ -16,8 +16,9 @@ export default function MovieDetails() {
   const linkToGoBack = useRef(location.state?.from ?? '/movies');
 
   useEffect(() => {
-    getMovieDetails(movieID).then(result => {
-      console.log(result);
+    getMovieDetails(movieID).then(resp => {
+      const result = resp.data;
+      console.log(resp);
       setTitle(result.title);
       setImage(result.poster_path);
       setReleaseYear(new Date(result.release_date).getFullYear());
@@ -46,7 +47,12 @@ export default function MovieDetails() {
       <hr />
       <p>Additional information</p>
       <Link to="cast">Cast</Link>
-      <Outlet />
+      <br />
+      <Link to="reviews">Reviews</Link>
+
+      <Suspense fallback={<div>LOADING...</div>}>
+        <Outlet />
+      </Suspense>
     </>
   );
 }

@@ -8,7 +8,12 @@ export default function Cast() {
   const [castArr, setCastArr] = useState([]);
 
   useEffect(() => {
-    getMovieCredits(movieID).then(result => setCastArr([...result.cast]));
+    getMovieCredits(movieID)
+      .then(resp => {
+        console.log(resp);
+        setCastArr([...resp.data.cast]);
+      })
+      .catch(error => console.log(error));
   }, [movieID]);
 
   return (

@@ -1,5 +1,6 @@
 import { NavLink, Outlet } from 'react-router-dom';
 import styled from '@emotion/styled';
+import { Suspense } from 'react';
 
 const StyledLink = styled(NavLink)`
   color: black;
@@ -25,7 +26,9 @@ export default function Layout() {
         </nav>
       </header>
       <main>
-        <Outlet />
+        <Suspense fallback={<div>LOADING...</div>}>
+          <Outlet />
+        </Suspense>
       </main>
     </>
   );

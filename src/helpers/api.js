@@ -23,7 +23,7 @@ async function getTrendingMovies() {
       }
     });
 
-  return response.data.results;
+  return response;
 }
 
 async function getMovieDetails(id) {
@@ -45,7 +45,7 @@ async function getMovieDetails(id) {
       }
     });
 
-  return response.data;
+  return response;
 }
 
 async function getSearchMovies(query) {
@@ -67,7 +67,7 @@ async function getSearchMovies(query) {
       }
     });
 
-  return response.data.results;
+  return response;
 }
 
 async function getMovieCredits(id) {
@@ -89,7 +89,35 @@ async function getMovieCredits(id) {
       }
     });
 
-  return response.data;
+  return response;
 }
 
-export { getTrendingMovies, getMovieDetails, getSearchMovies, getMovieCredits };
+async function getMovieReviews(id) {
+  const response = await axios
+    .get(`${BASE_URL}movie/${id}/reviews?api_key=${API_KEY}`)
+    .catch(function (error) {
+      if (error.response) {
+        toast.error(
+          'Oops!!!Something went wrong, please reload the page and try again'
+        );
+      } else if (error.request) {
+        toast.error(
+          'Oops!!!Something went wrong, please reload the page and try again'
+        );
+      } else {
+        toast.error(
+          'Oops!!!Something went wrong, please reload the page and try again'
+        );
+      }
+    });
+
+  return response;
+}
+
+export {
+  getTrendingMovies,
+  getMovieDetails,
+  getSearchMovies,
+  getMovieCredits,
+  getMovieReviews,
+};
