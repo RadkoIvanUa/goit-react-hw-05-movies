@@ -1,4 +1,4 @@
-import { Suspense, lazy } from 'react';
+import { lazy } from 'react';
 import { useLocation } from 'react-router-dom';
 
 const MovieListItem = lazy(() => import('../movie-list-item/MovieListItem'));
