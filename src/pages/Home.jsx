@@ -7,7 +7,6 @@ export default function Home() {
 
   useEffect(() => {
     getTrendingMovies().then(resp => {
-      console.log(resp);
       setTrendingMoviesArr([...resp.data.results]);
     });
   }, []);

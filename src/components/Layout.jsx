@@ -26,7 +26,7 @@ export default function Layout() {
         </nav>
       </header>
       <main>
-        <Suspense fallback={<div>LOADING...</div>}>
+        <Suspense fallback={<div>LOADING SUSPENCE...</div>}>
           <Outlet />
         </Suspense>
       </main>

@@ -1,20 +1,25 @@
 import { getMovieReviews } from 'helpers/api';
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
+import { ToastContainer, toast } from 'react-toastify';
 
 export default function Reviews() {
   const { movieID } = useParams();
   const [reviewsArr, setReviewsArr] = useState([]);
+  const [isHaveReviews, setIsHaveReviews] = useState(true);
 
   useEffect(() => {
     getMovieReviews(movieID).then(resp => {
-      if (resp.data.results.lengtn === 0) return;
-      console.log(resp);
+      if (resp.data.total_results === 0) {
+        setIsHaveReviews(false);
+        toast.info('We don`t have any reviews for this movie');
+        return;
+      }
       setReviewsArr([...resp.data.results]);
     });
   }, [movieID]);
 
-  return reviewsArr.length !== 0 ? (
+  return isHaveReviews ? (
     <ul>
       {reviewsArr.map(({ author, content, id }) => (
         <li key={id}>
@@ -24,6 +29,6 @@ export default function Reviews() {
       ))}
     </ul>
   ) : (
-    <p>We don`t have any reviews for this movie</p>
+    <ToastContainer />
   );
 }

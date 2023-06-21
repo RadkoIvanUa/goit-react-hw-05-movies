@@ -4,11 +4,11 @@ import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 import Layout from './Layout';
-
+// PAGES
 const Home = lazy(() => import('../pages/Home'));
 const Movies = lazy(() => import('../pages/Movies'));
 const MovieDetails = lazy(() => import('../pages/MovieDetails'));
-
+// COMPONENTS
 const Cast = lazy(() => import('./cast/Cast'));
 const Reviews = lazy(() => import('./reviews/Reviews'));
 
