@@ -1,6 +1,6 @@
 import { getTrendingMovies } from 'helpers/api';
-import { useEffect, useState, lazy } from 'react';
-const MoviesList = lazy(() => import('../components/movies-list/MoviesList'));
+import { useEffect, useState } from 'react';
+import MoviesList from 'components/movies-list/MoviesList';
 
 export default function Home() {
   const [trendingMoviesArr, setTrendingMoviesArr] = useState([]);
@@ -11,5 +11,10 @@ export default function Home() {
     });
   }, []);
 
-  return <MoviesList moviesArr={trendingMoviesArr} />;
+  return (
+    <>
+      <h2 style={{ textAlign: 'center' }}>Trending now</h2>
+      <MoviesList moviesArr={trendingMoviesArr} />
+    </>
+  );
 }

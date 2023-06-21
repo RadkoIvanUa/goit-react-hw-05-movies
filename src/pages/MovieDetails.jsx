@@ -1,6 +1,7 @@
 import { getMovieDetails } from 'helpers/api';
 import { Suspense, useEffect, useRef, useState } from 'react';
 import { Link, useParams, useLocation, Outlet } from 'react-router-dom';
+import { ThreeDots, Puff } from 'react-loader-spinner';
 
 export default function MovieDetails() {
   const { movieID } = useParams();
@@ -21,7 +22,6 @@ export default function MovieDetails() {
     getMovieDetails(movieID)
       .then(resp => {
         const result = resp.data;
-        console.log(resp);
         setTitle(result.title);
         setImage(result.poster_path);
         setReleaseYear(new Date(result.release_date).getFullYear());
@@ -42,7 +42,16 @@ export default function MovieDetails() {
       <Link to={linkToGoBack.current}>Go back</Link>
 
       {isMovieDataLoading ? (
-        <div>Movie Data Loading...</div>
+        <Puff
+          height="80"
+          width="80"
+          radius="9"
+          color="orange"
+          ariaLabel="three-dots-loading"
+          wrapperStyle={{}}
+          wrapperClassName=""
+          visible={true}
+        />
       ) : (
         <>
           <h2>
@@ -68,7 +77,20 @@ export default function MovieDetails() {
       <br />
       <Link to="reviews">Reviews</Link>
 
-      <Suspense fallback={<div>LOADING...</div>}>
+      <Suspense
+        fallback={
+          <ThreeDots
+            height="80"
+            width="80"
+            radius="9"
+            color="orange"
+            ariaLabel="three-dots-loading"
+            wrapperStyle={{}}
+            wrapperClassName=""
+            visible={true}
+          />
+        }
+      >
         <Outlet />
       </Suspense>
     </>

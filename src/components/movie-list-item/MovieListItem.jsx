@@ -1,4 +1,5 @@
 import { Link } from 'react-router-dom';
+import PropTypes from 'prop-types';
 
 export default function MovieListItem({ id, title, location }) {
   return location.pathname === '/movies' ? (
@@ -15,3 +16,9 @@ export default function MovieListItem({ id, title, location }) {
     </li>
   );
 }
+
+MovieListItem.propTypes = {
+  id: PropTypes.number.isRequired,
+  title: PropTypes.string.isRequired,
+  location: PropTypes.object.isRequired,
+};

@@ -3,14 +3,14 @@ import { Route, Routes } from 'react-router-dom';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
-import Layout from './Layout';
+// COMPONENTS
+import Cast from './cast/Cast';
+import Reviews from './reviews/Reviews';
+import Layout from './layout/Layout';
 // PAGES
 const Home = lazy(() => import('../pages/Home'));
 const Movies = lazy(() => import('../pages/Movies'));
 const MovieDetails = lazy(() => import('../pages/MovieDetails'));
-// COMPONENTS
-const Cast = lazy(() => import('./cast/Cast'));
-const Reviews = lazy(() => import('./reviews/Reviews'));
 
 export const App = () => {
   return (

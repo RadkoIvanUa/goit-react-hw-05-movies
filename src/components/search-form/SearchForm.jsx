@@ -1,15 +1,17 @@
 import { useState } from 'react';
 
+import PropTypes from 'prop-types';
+
 export default function SearchForm({ onSubmit }) {
   const [searchValue, setSearchValue] = useState('');
   const [isSearchButtonDisable, setIsSearchButtonDisable] = useState(true);
 
   const heandleChange = e => {
-    if (e.target.value.trim() === '') {
-      return;
-    } else {
-      setIsSearchButtonDisable(false);
+    setIsSearchButtonDisable(false);
+    if (!e.target.value.trim()) {
+      setIsSearchButtonDisable(true);
     }
+
     setSearchValue(e.target.value);
   };
 
@@ -29,3 +31,7 @@ export default function SearchForm({ onSubmit }) {
     </form>
   );
 }
+
+SearchForm.propTYpes = {
+  onSubmit: PropTypes.func.isRequired,
+};

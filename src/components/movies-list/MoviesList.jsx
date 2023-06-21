@@ -1,13 +1,17 @@
-import { lazy } from 'react';
 import { useLocation } from 'react-router-dom';
+import PropTypes from 'prop-types';
 
-const MovieListItem = lazy(() => import('../movie-list-item/MovieListItem'));
+import MovieListItem from 'components/movie-list-item/MovieListItem';
+
+// STYLED COMPONENTS
+
+import { StyledMoviesList } from './StyledMovieList';
 
 export default function MoviesList({ moviesArr }) {
   const location = useLocation();
 
   return (
-    <ul>
+    <StyledMoviesList>
       {moviesArr.map(trendingMovie => (
         <MovieListItem
           key={trendingMovie.id}
@@ -16,6 +20,10 @@ export default function MoviesList({ moviesArr }) {
           location={location}
         />
       ))}
-    </ul>
+    </StyledMoviesList>
   );
 }
+
+MoviesList.propTypes = {
+  moviesArr: PropTypes.arrayOf(PropTypes.object).isRequired,
+};
