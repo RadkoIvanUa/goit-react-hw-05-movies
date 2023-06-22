@@ -32,6 +32,6 @@ export default function SearchForm({ onSubmit }) {
   );
 }
 
-SearchForm.propTYpes = {
+SearchForm.propTypes = {
   onSubmit: PropTypes.func.isRequired,
 };
