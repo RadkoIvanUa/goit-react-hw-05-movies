@@ -1,9 +1,91 @@
 import { getMovieDetails } from 'helpers/api';
 import { Suspense, useEffect, useRef, useState } from 'react';
-import { Link, useParams, useLocation, Outlet } from 'react-router-dom';
+import {
+  Link,
+  useParams,
+  useLocation,
+  Outlet,
+  NavLink,
+} from 'react-router-dom';
 import { ThreeDots, Puff } from 'react-loader-spinner';
 
-export default function MovieDetails() {
+import Details from 'components/movie-details/Details';
+import styled from '@emotion/styled';
+
+const GoBackLink = styled(NavLink)`
+  font-size: 20px;
+  all: unset;
+  width: 100px;
+  height: 30px;
+  font-size: 16px;
+  background: transparent;
+  border: none;
+  position: relative;
+  color: #f0f0f0;
+  cursor: pointer;
+  z-index: 1;
+  padding: 10px 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  white-space: nowrap;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+  transition: all 0.4s;
+  margin-bottom: 20px;
+
+  :hover {
+    color: orange;
+  }
+  :after,
+  :before {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    z-index: -99999;
+    transition: all 0.4s;
+  }
+
+  :before {
+    transform: translate(0%, 0%);
+    width: 100%;
+    height: 100%;
+    background: #28282d;
+    border-radius: 10px;
+  }
+
+  :after {
+    transform: translate(10px, 10px);
+    width: 35px;
+    height: 35px;
+    background: #ffffff15;
+    backdrop-filter: blur(5px);
+    -webkit-backdrop-filter: blur(5px);
+    border-radius: 50px;
+  }
+
+  :hover::before {
+    transform: translate(5%, 20%);
+    width: 110%;
+    height: 110%;
+  }
+
+  :hover::after {
+    border-radius: 10px;
+    transform: translate(0, 0);
+    width: 100%;
+    height: 100%;
+  }
+
+  :active::after {
+    transition: 0s;
+    transform: translate(0, 5%);
+  }
+`;
+
+export default function MovieDetailsPage() {
   const { movieID } = useParams();
 
   const [title, setTitle] = useState('');
@@ -39,7 +121,7 @@ export default function MovieDetails() {
 
   return (
     <>
-      <Link to={linkToGoBack.current}>Go back</Link>
+      <GoBackLink to={linkToGoBack.current}>Go back</GoBackLink>
 
       {isMovieDataLoading ? (
         <Puff
@@ -53,22 +135,14 @@ export default function MovieDetails() {
           visible={true}
         />
       ) : (
-        <>
-          <h2>
-            {title} ({releaseYear})
-          </h2>
-          <img
-            src={`https://image.tmdb.org/t/p/w200/${image}`}
-            alt=""
-            width="200px"
-            height="300px"
-          />
-          <p> User Score: {score}%</p>
-          <h3>Overview </h3>
-          <p>{overview}</p>
-          <h4>Genres</h4>
-          <p>{genres.join(', ')}</p>
-        </>
+        <Details
+          title={title}
+          releaseYear={releaseYear}
+          score={score}
+          image={image}
+          overview={overview}
+          genres={genres}
+        />
       )}
 
       <hr />

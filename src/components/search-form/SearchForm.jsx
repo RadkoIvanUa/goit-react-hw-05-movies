@@ -2,6 +2,9 @@ import { useState } from 'react';
 
 import PropTypes from 'prop-types';
 
+// STYLED COMPONENTS
+import { StyledSearchForm } from './StyledSearchForm';
+
 export default function SearchForm({ onSubmit }) {
   const [searchValue, setSearchValue] = useState('');
   const [isSearchButtonDisable, setIsSearchButtonDisable] = useState(true);
@@ -23,12 +26,12 @@ export default function SearchForm({ onSubmit }) {
   };
 
   return (
-    <form onSubmit={heandleSubmit}>
+    <StyledSearchForm onSubmit={heandleSubmit}>
       <input type="text" value={searchValue} onChange={heandleChange} />
       <button type="submit" disabled={isSearchButtonDisable}>
         Search
       </button>
-    </form>
+    </StyledSearchForm>
   );
 }
 

@@ -7,6 +7,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import Cast from './cast/Cast';
 import Reviews from './reviews/Reviews';
 import Layout from './layout/Layout';
+
 // PAGES
 const Home = lazy(() => import('../pages/Home'));
 const Movies = lazy(() => import('../pages/Movies'));
