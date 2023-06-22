@@ -1,18 +1,19 @@
 import { getMovieDetails } from 'helpers/api';
 import { Suspense, useEffect, useRef, useState } from 'react';
-import {
-  Link,
-  useParams,
-  useLocation,
-  Outlet,
-  NavLink,
-} from 'react-router-dom';
+import { useParams, useLocation, Outlet, NavLink } from 'react-router-dom';
 import { ThreeDots, Puff } from 'react-loader-spinner';
 
 import Details from 'components/movie-details/Details';
+import { StyledAdditionalInfo } from 'components/movie-details/StyledDetails';
 import styled from '@emotion/styled';
+import {
+  BsFillArrowDownCircleFill,
+  BsFillArrowLeftCircleFill,
+  BsPeople,
+} from 'react-icons/bs';
+import { VscPreview } from 'react-icons/vsc';
 
-const GoBackLink = styled(NavLink)`
+const DetailsPagesLink = styled(NavLink)`
   font-size: 20px;
   all: unset;
   width: 100px;
@@ -121,8 +122,9 @@ export default function MovieDetailsPage() {
 
   return (
     <>
-      <GoBackLink to={linkToGoBack.current}>Go back</GoBackLink>
-
+      <DetailsPagesLink to={linkToGoBack.current}>
+        <BsFillArrowLeftCircleFill style={{ marginRight: '10px' }} /> Go back
+      </DetailsPagesLink>
       {isMovieDataLoading ? (
         <Puff
           height="80"
@@ -130,7 +132,11 @@ export default function MovieDetailsPage() {
           radius="9"
           color="orange"
           ariaLabel="three-dots-loading"
-          wrapperStyle={{}}
+          wrapperStyle={{
+            display: 'flex',
+            justifyContent: 'center',
+            transform: 'translateY(70%)',
+          }}
           wrapperClassName=""
           visible={true}
         />
@@ -144,13 +150,30 @@ export default function MovieDetailsPage() {
           genres={genres}
         />
       )}
-
-      <hr />
-      <p>Additional information</p>
-      <Link to="cast">Cast</Link>
-      <br />
-      <Link to="reviews">Reviews</Link>
-
+      <div
+        style={{
+          display: 'flex',
+          alignItems: 'center',
+          gap: '10px',
+          marginBottom: '20px',
+        }}
+      >
+        <h3 style={{ display: 'inline' }} id="scroll">
+          Additional information
+        </h3>
+        <BsFillArrowDownCircleFill style={{ color: 'orange' }} />
+      </div>
+      <StyledAdditionalInfo>
+        <DetailsPagesLink to="cast">
+          Cast
+          <BsPeople style={{ marginLeft: '10px' }} />
+        </DetailsPagesLink>
+        <br />
+        <DetailsPagesLink to="reviews">
+          Reviews
+          <VscPreview style={{ marginLeft: '10px' }} />
+        </DetailsPagesLink>
+      </StyledAdditionalInfo>
       <Suspense
         fallback={
           <ThreeDots
@@ -159,7 +182,6 @@ export default function MovieDetailsPage() {
             radius="9"
             color="orange"
             ariaLabel="three-dots-loading"
-            wrapperStyle={{}}
             wrapperClassName=""
             visible={true}
           />

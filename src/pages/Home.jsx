@@ -13,7 +13,9 @@ export default function Home() {
 
   return (
     <>
-      <h2 style={{ textAlign: 'center' }}>Trending now</h2>
+      <h2 style={{ textAlign: 'center', marginBottom: '10px' }}>
+        Trending now
+      </h2>
       <MoviesList moviesArr={trendingMoviesArr} />
     </>
   );

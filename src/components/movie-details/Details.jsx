@@ -1,5 +1,7 @@
 import { StyledDetails } from './StyledDetails';
 
+import PropTypes from 'prop-types';
+
 export default function Details({
   title,
   releaseYear,
@@ -10,12 +12,22 @@ export default function Details({
 }) {
   return (
     <StyledDetails>
-      <img
-        src={`https://image.tmdb.org/t/p/w200/${image}`}
-        alt=""
-        width="200px"
-        height="300px"
-      />
+      {image ? (
+        <img
+          src={`https://image.tmdb.org/t/p/w200/${image}`}
+          alt=""
+          width="200px"
+          height="300px"
+        />
+      ) : (
+        <img
+          src="https://i.imgur.com/oQs3mlT.png"
+          alt="Actor"
+          width="200px"
+          height="300px"
+        />
+      )}
+
       <div>
         <h2>
           {title} ({releaseYear})
@@ -30,3 +42,12 @@ export default function Details({
     </StyledDetails>
   );
 }
+
+Details.propTypes = {
+  title: PropTypes.string,
+  releaseYear: PropTypes.number,
+  score: PropTypes.string,
+  image: PropTypes.string,
+  overview: PropTypes.array,
+  genres: PropTypes.arrayOf(PropTypes.object),
+};

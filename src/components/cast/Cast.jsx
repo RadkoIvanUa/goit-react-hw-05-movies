@@ -2,6 +2,7 @@ import { getMovieCredits } from 'helpers/api';
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { ToastContainer, toast } from 'react-toastify';
+import { StyledCast } from './StyledCast';
 
 export default function Cast() {
   const { movieID } = useParams();
@@ -20,8 +21,12 @@ export default function Cast() {
     });
   }, [movieID]);
 
+  useEffect(() => {
+    document.getElementById('scroll').scrollIntoView({ behavior: 'smooth' });
+  }, [castArr]);
+
   return isHaveCastInfo ? (
-    <ul>
+    <StyledCast>
       {castArr.map(({ profile_path, name, character, id }) => (
         <li key={id}>
           {profile_path ? (
@@ -33,18 +38,20 @@ export default function Cast() {
             />
           ) : (
             <img
-              src="https://i.imgur.com/JQ8ngUd.png"
+              src="https://i.imgur.com/2OVME7K.png"
               alt="Actor"
               width="200px"
               height="300px"
             />
           )}
 
-          <p>{name}</p>
-          <p>{character}</p>
+          <div>
+            <h3>{name}</h3>
+            <h5>{character}</h5>
+          </div>
         </li>
       ))}
-    </ul>
+    </StyledCast>
   ) : (
     <ToastContainer />
   );

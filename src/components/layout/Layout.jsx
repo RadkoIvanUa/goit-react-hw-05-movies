@@ -44,12 +44,16 @@ export default function Layout() {
           <Suspense
             fallback={
               <Puff
-                height="80"
-                width="80"
+                height="160"
+                width="160"
                 radius={1}
                 color="orange"
                 ariaLabel="puff-loading"
-                wrapperStyle={{}}
+                wrapperStyle={{
+                  display: 'flex',
+                  justifyContent: 'center',
+                  transform: 'translateY(70%)',
+                }}
                 wrapperClass=""
                 visible={true}
               />

@@ -3,6 +3,8 @@ import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { ToastContainer, toast } from 'react-toastify';
 
+import { StyledReviews } from './StyledReviews';
+
 export default function Reviews() {
   const { movieID } = useParams();
   const [reviewsArr, setReviewsArr] = useState([]);
@@ -19,15 +21,19 @@ export default function Reviews() {
     });
   }, [movieID]);
 
+  useEffect(() => {
+    document.getElementById('scroll').scrollIntoView({ behavior: 'smooth' });
+  }, [reviewsArr]);
+
   return isHaveReviews ? (
-    <ul>
+    <StyledReviews>
       {reviewsArr.map(({ author, content, id }) => (
         <li key={id}>
           <h4>Author: {author}</h4>
           <p>{content}</p>
         </li>
       ))}
-    </ul>
+    </StyledReviews>
   ) : (
     <ToastContainer />
   );
